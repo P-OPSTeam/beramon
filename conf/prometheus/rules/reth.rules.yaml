@@ -1,0 +1,11 @@
+groups:
+  - name: Reth
+    rules:
+    - alert: NodeStuck
+      expr: increase(reth_blockchain_tree_canonical_chain_height{}[15m]) == 0
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Node {{ $labels.instance }} stuck"
+        description: "Node {{ $labels.instance }} stuck"
